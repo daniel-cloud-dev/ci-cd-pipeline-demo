@@ -1,0 +1,11 @@
+# ruff.toml
+[lint]
+select = [
+    "E",   # erros de estilo
+    "F",   # erros de logica (imports nao usados, variaveis indefinidas)
+    "I",   # ordenacao de imports
+]
+ignore = []
+
+[lint.per-file-ignores]
+"api/tests/*" = ["F811"]  # testes podem redefinir fixtures
