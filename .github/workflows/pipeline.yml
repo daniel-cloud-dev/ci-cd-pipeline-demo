@@ -30,11 +30,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Gerar metadados da image
+      - name: Generate image metadata
+
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: ${{ secrets.DOCKER_USERNAME }}/minha-api
+          images: ${{ secrets.DOCKER_USERNAME }}/my-api
           tags: |
             type=sha,prefix=,suffix=,format=short
             type=raw,value=latest
@@ -46,7 +47,7 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_TOKEN }}
 
-      - name: Build e push com todas as tags
+      - name: Build e push with all tags
         uses: docker/build-push-action@v5
         with:
           context: ./api
