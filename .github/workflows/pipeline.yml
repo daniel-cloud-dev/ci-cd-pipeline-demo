@@ -54,7 +54,7 @@ jobs:
       - name: Build e push with all tags
         uses: docker/build-push-action@v5
         with:
-          context: ./docker
+          context: .
           file: ./docker/Dockerfile
           push: true
           tags: ${{ steps.meta.outputs.tags }}

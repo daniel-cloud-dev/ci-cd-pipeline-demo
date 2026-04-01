@@ -13,7 +13,7 @@ WORKDIR /app
 
 COPY --from=builder /install /usr/local
 
-COPY --from=builder app/api ./api
+COPY --from=builder /app/api ./api
 
 EXPOSE 5000
 CMD [ "python", "api/app.py" ]
