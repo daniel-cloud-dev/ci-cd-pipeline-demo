@@ -19,7 +19,7 @@ def create_app():
     @app.route("/users")
     def users():
         return jsonify([
-            {"id": 1, "name": "Ana"},
+            {"id": 1, "name": "Gustavo"},
             {"id": 2, "name": "Bruno"},
             {"id": 3, "name": "Carlos"},
         ])
