@@ -13,7 +13,7 @@ def create_app():
     @app.route("/health")
     def health():
         return jsonify({
-            "status": "healthy"
+            "status": "health"
         }), 200
 
     @app.route("/users")
