@@ -1,5 +1,5 @@
 import pytest
-from api.app import create_app
+from app.run import create_app
 
 @pytest.fixture
 def client():
@@ -8,22 +8,20 @@ def client():
     with app.test_client() as client:
         yield client
 
-def test_home_returns_200(client):
-    response = client.get("/")
+def test_users(client, monkeypatch):
+    def fake_get_all_users():
+        return [(1, "Daniel")]
+
+    monkeypatch.setattr(
+        "app.users.services.get_all_users",
+        fake_get_all_users
+    )
+
+    response = client.get("/users/")
+
     assert response.status_code == 200
 
-def test_json_returns_ok(client):
-    response = client.get("/")
-    data = response.get_json()
-    assert data["status"] == "ok"
-
-def test_health_returns_200(client):
-    response = client.get("/health")
-    data = response.get_json()
+def test_health(client):
+    response = client.get("/health/")
     assert response.status_code == 200
-    assert data["status"] == "healthy"
-
-def test_rote_returns_404(client):
-    response = client.get("/this-route-does-not-exist")
-    assert response.status_code == 404
-
+    assert response.json["status"] == "ok"
