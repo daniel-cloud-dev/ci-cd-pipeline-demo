@@ -1,11 +1,13 @@
 from flask import Flask
 from app.users.routes import users_bp
 from app.health.routes import health_bp
+from app.core.routes import home_bp
 
 def create_app(config_class="app.config.DevConfig"):
     app = Flask(__name__)
     app.config.from_object(config_class)
 
+    app.register_blueprint(home_bp)
     app.register_blueprint(users_bp)
     app.register_blueprint(health_bp)
 
