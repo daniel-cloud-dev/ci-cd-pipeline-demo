@@ -29,8 +29,10 @@ services:
     ports:
       - "5000:5000"
     depends_on:
-      - cache
-      - db
+      db:
+        condition: service_healthy
+      cache:
+        condition: service_healthy
     environment:
       DB_HOST: ${DB_HOST}
       DB_NAME: ${DB_NAME}
